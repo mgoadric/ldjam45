@@ -1079,14 +1079,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e773fa727e1b2b4795ef8001e50950d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  button1Active: 0
-  button1HoldScaled: 0
-  button2Active: 0
-  button2HoldScaled: 0
   hauntRadius: 0
+  button1HoldScaled: 0
+  pushUnlocked: 0
   pushStrength: 200
   pushRadius: 5
-  pushCD: 0.25
+  pushCD: 0.3
+  holdUnlocked: 0
+  holdStrength: 0
+  holdRadius: 8
+  button2Active: 0
+  button2HoldScaled: 0
   pushEffect: {fileID: 2417552227695126670, guid: 8d7798a75e1f43943ab226cd87e8835a,
     type: 3}
 --- !u!4 &71383031
@@ -1572,7 +1575,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 173a0be5e1342e6458b6c1339585faf0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
