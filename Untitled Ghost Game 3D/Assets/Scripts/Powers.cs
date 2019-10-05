@@ -29,9 +29,9 @@ public class Powers : MonoBehaviour
     public float button2HoldScaled;
 
 
-    
 
-    
+
+
 
     public GameObject pushEffect;
 
@@ -43,7 +43,7 @@ public class Powers : MonoBehaviour
         button1HoldScaled = -1;
         button2HoldScaled = -1;
         canPush = true;
-        nextPush =0;
+        nextPush = 0;
         pushUnlocked = true;
         button2Active = true;
     }
@@ -59,7 +59,7 @@ public class Powers : MonoBehaviour
 
     public void getInput(bool button1, bool button2)
     {
-        if(pushUnlocked)
+        if (pushUnlocked)
         {
             if (!button1Prev && button1)
                 Button1Down();
@@ -70,7 +70,7 @@ public class Powers : MonoBehaviour
             else
                 Button1NoInput();
         }
-        if(button2Active)
+        if (button2Active)
         {
             if (!button2Prev && button2)
                 Button2Down();
@@ -86,7 +86,7 @@ public class Powers : MonoBehaviour
         button2Prev = button2;
     }
 
-    
+
 
     public void NoPush()
     {
@@ -95,7 +95,7 @@ public class Powers : MonoBehaviour
 
     public void SpacePressed()
     {
-        if(canPush)
+        if (canPush)
         {
             Push();
         }
@@ -107,13 +107,13 @@ public class Powers : MonoBehaviour
 
         button1HoldStart = Time.time;
 
-        if(canPush)
+        if (canPush)
         {
             Push();
             nextPush = Time.time + pushCD;
             canPush = false;
         }
-        
+
     }
 
     private void Button1Held()
@@ -156,7 +156,7 @@ public class Powers : MonoBehaviour
         Debug.Log("Button2Held()");
         button2HoldScaled = Time.time - button2HoldStart;
     }
-    
+
     private void Button2Up()
     {
         Debug.Log("Button2Up()");
@@ -166,11 +166,11 @@ public class Powers : MonoBehaviour
 
     public void Button2NoInput()
     {
-        
+
     }
 
     private void Push()
-    {    
+    {
         GameObject particles = Instantiate(pushEffect, transform.position, Quaternion.identity);
         Destroy(particles, particles.GetComponent<ParticleSystem>().main.duration);
         Debug.Log(message: "Pushing, radius=" + pushRadius);
@@ -191,5 +191,15 @@ public class Powers : MonoBehaviour
             i++;
         }
         Debug.Log(message: objectForces);
+    }
+
+    private void Hold()
+    {
+        Collider[] holdColliders = Physics.OverlapSphere(tf.position, holdRadius);
+        int i = 0;
+        while (i < holdColliders.Length)
+        {
+
+        }
     }
 }
