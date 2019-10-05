@@ -6,7 +6,10 @@ public class Ghost : MonoBehaviour
 {
 
     private Rigidbody rb;
-    public int moveSpeed;
+    public float moveSpeed;
+    public float pushStrength;
+    public float pushRadius;
+
 
     // Start is called before the first frame update
     void Start()
@@ -26,6 +29,22 @@ public class Ghost : MonoBehaviour
             rb.AddForce(Vector3.forward * moveSpeed);
         if (Input.GetKey(KeyCode.S))
             rb.AddForce(Vector3.back * moveSpeed);
+        if (Input.GetKey(KeyCode.Space))
+            Push(pushRadius);
 
+    }
+
+    private void Push(float radius)
+    {
+        Debug.Log(message: "Pushing, radius=" + radius);
+        Collider[] hitColliders = Physics.OverlapSphere(rb.position, radius);
+        int i = 0;
+        string objectNames = "";
+        while (i < hitColliders.Length)
+        {
+            objectNames += hitColliders[i].name;
+            i++;
+        }
+        Debug.Log(message: objectNames);
     }
 }
