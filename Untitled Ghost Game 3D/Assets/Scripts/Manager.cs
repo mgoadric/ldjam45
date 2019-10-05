@@ -36,46 +36,55 @@ public class Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Y))
+            AddGoal("Do Next Thing");
+        if (Input.GetKeyDown(KeyCode.U))
+            WipeBar();
     }
 
     void WipeBar()
     {
-        // destroy the goals and remove from currentGoals
+        lock (this)
+        {
+            // destroy the goals and remove from currentGoals
+            foreach (GameObject go in currentGoals)
+            {
+                Destroy(go);
+            }
+            currentGoals.Clear();
+        }
     }
 
     void AddGoal(string goal)
     {
-        // make previous goal dark
-        if (currentGoals.Count > 0)
+        lock (this)
         {
-            GameObject prev = currentGoals[currentGoals.Count - 1];
-            prev.GetComponent<Image>().sprite = completedGoalSprite;
+            // make previous goal dark
+            if (currentGoals.Count > 0)
+            {
+                GameObject prev = currentGoals[currentGoals.Count - 1];
+                prev.GetComponent<Image>().sprite = completedGoalSprite;
+            }
+
+            GameObject bar = Instantiate(goalbar, canvas.transform);
+            Vector3 temp = bar.transform.position;
+            temp.y -= 75 * currentGoals.Count;
+            bar.transform.position = temp;
+
+            // add in the goal text
+            GameObject go = bar.transform.GetChild(0).gameObject;
+            TextMeshProUGUI tmpugui = go.GetComponent<TextMeshProUGUI>();
+            tmpugui.SetText(goal);
+
+            currentGoals.Add(bar);
+            Debug.Log("Added in " + goal);
         }
-
-        GameObject bar = Instantiate(goalbar, canvas.transform);
-        Vector3 temp = bar.transform.position;
-        temp.y -= 75 * currentGoals.Count;
-        bar.transform.position = temp;
-
-        // add in the goal text
-        GameObject go = bar.transform.GetChild(0).gameObject;
-        TextMeshProUGUI tmpugui = go.GetComponent<TextMeshProUGUI>();
-        tmpugui.SetText(goal);
-
-        currentGoals.Add(bar);
-        Debug.Log("Added in " + goal);
     }
 
     public void StartGame()
     {
         currentGoals = new List<GameObject>();
         AddGoal("Wake up Resident");
-        AddGoal("Do more!");
-        AddGoal("Wake up Resident");
-        AddGoal("Do more!");
-        AddGoal("Wake up Resident");
-        AddGoal("Do more!");
 
         StartCoroutine("GameScript");
 
