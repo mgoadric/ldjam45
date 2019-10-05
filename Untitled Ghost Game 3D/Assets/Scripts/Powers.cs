@@ -5,9 +5,13 @@ using UnityEngine;
 public class Powers : MonoBehaviour
 {
     private Transform tf;
-    private bool button1Prev;
-    private float button1HoldTime; 
+    public bool button1Prev;
+    private float button1HoldTime;
+    public float button1HoldScaled;
+
     private bool button2Prev;
+    private float button2HoldTime;
+    public float button2HoldScaled;
 
 
     public float hauntRadius;
@@ -38,14 +42,14 @@ public class Powers : MonoBehaviour
 
     public void getInput(bool button1, bool button2)
     {
-        if (button1)
+        if (!button1Prev && button1)
             Button1Down();
         if(button1Prev && button1)
             Button1Held();
         if (button1Prev && !button1)
             Button1Up();
 
-        if (button2)
+        if (!button2Prev && button2)
             Button2Down();
         if (button2Prev && button2)
             Button2Held();
@@ -94,6 +98,11 @@ public class Powers : MonoBehaviour
     private void Button1Up()
     {
         Debug.Log("Button1Up()");
+        if (Time.time > nextPush)
+        {
+            canPush = true;
+        }
+
     }
 
     private void Button2Down()
