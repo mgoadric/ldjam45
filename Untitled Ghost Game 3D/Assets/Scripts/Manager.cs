@@ -4,7 +4,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public enum State { START, MIDDLE, END }
 
 public class Manager : MonoBehaviour
@@ -68,7 +67,10 @@ public class Manager : MonoBehaviour
 
             GameObject bar = Instantiate(goalbar, canvas.transform);
             Vector3 temp = bar.transform.position;
-            temp.y -= 75 * currentGoals.Count;
+
+            float shrink = Screen.height / 900f; 
+
+            temp.y -= 65 * shrink * currentGoals.Count;
             bar.transform.position = temp;
 
             // add in the goal text
