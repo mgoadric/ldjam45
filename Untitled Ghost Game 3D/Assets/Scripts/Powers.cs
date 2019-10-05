@@ -122,7 +122,8 @@ public class Powers : MonoBehaviour
 
     public void Push()
     {    
-        Instantiate(pushEffect, transform.position, Quaternion.identity);
+        GameObject particles = Instantiate(pushEffect, transform.position, Quaternion.identity);
+        Destroy(particles, particles.GetComponent<ParticleSystem>().main.duration);
         Debug.Log(message: "Pushing, radius=" + pushRadius);
         Collider[] hitColliders = Physics.OverlapSphere(tf.position, pushRadius);
         int i = 0;
