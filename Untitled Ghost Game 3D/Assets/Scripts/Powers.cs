@@ -6,10 +6,22 @@ public class Powers : MonoBehaviour
 {
     private Transform tf;
 
-    public bool button1Active;
+    public float hauntRadius;
+
+    public bool pushUnlocked;
     private bool button1Prev;
     private float button1HoldStart;
     public float button1HoldScaled;
+
+    public float pushStrength;
+    public float pushRadius;
+    public float pushCD;
+    public float holdStrength;
+    public float holdRadius;
+
+    private float nextPush;
+    private bool canPush;
+    private GameObject[] grabPoints;
 
     public bool button2Active;
     private bool button2Prev;
@@ -17,14 +29,9 @@ public class Powers : MonoBehaviour
     public float button2HoldScaled;
 
 
-    public float hauntRadius;
+    
 
-    public float pushStrength;
-    public float pushRadius;
-    public float pushCD;
-    private float nextPush;
-    private bool canPush;
-
+    
 
     public GameObject pushEffect;
 
@@ -37,7 +44,7 @@ public class Powers : MonoBehaviour
         button2HoldScaled = -1;
         canPush = true;
         nextPush =0;
-        button1Active = true;
+        pushUnlocked = true;
         button2Active = true;
     }
 
@@ -52,7 +59,7 @@ public class Powers : MonoBehaviour
 
     public void getInput(bool button1, bool button2)
     {
-        if(button1Active)
+        if(pushUnlocked)
         {
             if (!button1Prev && button1)
                 Button1Down();
@@ -162,7 +169,7 @@ public class Powers : MonoBehaviour
         
     }
 
-    public void Push()
+    private void Push()
     {    
         GameObject particles = Instantiate(pushEffect, transform.position, Quaternion.identity);
         Destroy(particles, particles.GetComponent<ParticleSystem>().main.duration);
