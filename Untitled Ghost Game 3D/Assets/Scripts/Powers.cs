@@ -5,10 +5,13 @@ using UnityEngine;
 public class Powers : MonoBehaviour
 {
     private Transform tf;
+
+    public bool button1Active;
     private bool button1Prev;
     private float button1HoldStart;
     public float button1HoldScaled;
 
+    public bool button2Active;
     private bool button2Prev;
     private float button2HoldStart;
     public float button2HoldScaled;
@@ -34,6 +37,8 @@ public class Powers : MonoBehaviour
         button2HoldScaled = -1;
         canPush = true;
         nextPush =0;
+        button1Active = true;
+        button2Active = true;
     }
 
     // Update is called once per frame
@@ -47,34 +52,34 @@ public class Powers : MonoBehaviour
 
     public void getInput(bool button1, bool button2)
     {
-        if (!button1Prev && button1)
-            Button1Down();
-        if(button1Prev && button1)
-            Button1Held();
-        if (button1Prev && !button1)
-            Button1Up();
+        if(button1Active)
+        {
+            if (!button1Prev && button1)
+                Button1Down();
+            else if (button1Prev && button1)
+                Button1Held();
+            else if (button1Prev && !button1)
+                Button1Up();
+            else
+                Button1NoInput();
+        }
+        if(button2Active)
+        {
+            if (!button2Prev && button2)
+                Button2Down();
+            else if (button2Prev && button2)
+                Button2Held();
+            else if (button2Prev && !button2)
+                Button2Up();
+            else
+                Button2NoInput();
+        }
 
-        if (!button2Prev && button2)
-            Button2Down();
-        if (button2Prev && button2)
-            Button2Held();
-        if (button2Prev && !button2)
-            Button2Up();
-
-        if (!button1 && !button2)
-            NoInput();
         button1Prev = button1;
         button2Prev = button2;
     }
 
-    public void NoInput()
-    {
-        if(Time.time > nextPush)
-        {
-            canPush = true;
-        }
-        
-    }
+    
 
     public void NoPush()
     {
@@ -124,6 +129,15 @@ public class Powers : MonoBehaviour
 
     }
 
+    public void Button1NoInput()
+    {
+        if (Time.time > nextPush)
+        {
+            canPush = true;
+        }
+
+    }
+
     private void Button2Down()
     {
         Debug.Log("Button2Down()");
@@ -141,6 +155,11 @@ public class Powers : MonoBehaviour
         Debug.Log("Button2Up()");
         button2HoldScaled = -1;
 
+    }
+
+    public void Button2NoInput()
+    {
+        
     }
 
     public void Push()
