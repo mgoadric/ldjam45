@@ -16,7 +16,12 @@ public class Manager : MonoBehaviour
     public Sprite completedGoalSprite;
     private List<GameObject> currentGoals;
 
-    public GameObject instructions;
+    public GameObject pulseInfoGui;
+    public GameObject elecInfoGui;
+
+    public GameObject cat;
+    public GameObject resident;
+    public GameObject ghost;
 
     public static Manager S;
 
@@ -39,6 +44,10 @@ public class Manager : MonoBehaviour
             AddGoal("Do Next Thing");
         if (Input.GetKeyDown(KeyCode.U))
             WipeBar();
+        if (Input.GetKeyDown(KeyCode.O))
+            pulseInfoGui.SetActive(true);
+        if (Input.GetKeyDown(KeyCode.P))
+            elecInfoGui.SetActive(true);
     }
 
     void WipeBar()
