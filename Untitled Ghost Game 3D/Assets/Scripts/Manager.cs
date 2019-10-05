@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public enum State { START, MIDDLE, END }
@@ -42,11 +43,17 @@ public class Manager : MonoBehaviour
 
     void AddGoal(string goal)
     {
+        // make previous goal dark
+
         GameObject bar = Instantiate(goalbar, canvas.transform);
         Vector3 temp = bar.transform.position;
         temp.y -= 75 * currentGoals.Count;
         bar.transform.position = temp;
+
         // add in the goal text
+        GameObject go = bar.transform.GetChild(0).gameObject;
+        TextMeshProUGUI tmpugui = go.GetComponent<TextMeshProUGUI>();
+        tmpugui.SetText(goal);
 
         currentGoals.Add(bar);
         Debug.Log("Added in " + goal);
