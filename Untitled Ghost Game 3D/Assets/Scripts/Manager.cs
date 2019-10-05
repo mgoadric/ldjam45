@@ -11,7 +11,9 @@ public class Manager : MonoBehaviour
     public State gameState;
     public GameObject game;
 
-    public GameObject dialogbox;
+    public GameObject goalbar;
+    private List<GameObject> currentGoals;
+
     public GameObject instructions;
 
     public static Manager S;
@@ -34,6 +36,11 @@ public class Manager : MonoBehaviour
         
     }
 
+
+    void AddGoal()
+    {
+
+    }
 
     public void StartGame()
     {
