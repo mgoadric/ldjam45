@@ -20,7 +20,7 @@ public class Resident : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Vector3.Distance(transform.position, goal1.position));
+        //Debug.Log(Vector3.Distance(transform.position, goal1.position));
         // Just trying to get simple back and forth working.
         if (Vector3.Distance(transform.position, goal1.position) < 1.0f)
         {

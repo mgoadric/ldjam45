@@ -7,9 +7,7 @@ public enum State { START, MIDDLE, END }
 public class Manager : MonoBehaviour
 {
 
-    public GameObject gamePrefab;
     public State gameState;
-    public GameObject game;
 
     public GameObject goalbar;
     private List<GameObject> currentGoals;
@@ -27,7 +25,7 @@ public class Manager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        StartGame();
     }
 
     // Update is called once per frame
@@ -36,19 +34,27 @@ public class Manager : MonoBehaviour
         
     }
 
-
-    void AddGoal()
+    void WipeBar()
     {
+        // destroy the goals and remove from currentGoals
+    }
 
+    void AddGoal(string goal)
+    {
+        GameObject bar = Instantiate(goalbar);
+        Vector3 temp = bar.transform.position;
+        temp.y += 50 * currentGoals.Count;
+        bar.transform.position = temp;
+        // add in the goal text
+
+        currentGoals.Add(bar);
     }
 
     public void StartGame()
     {
-        if (game)
-        {
-            Destroy(game);
-        }
-        game = Instantiate(gamePrefab);
+        currentGoals = new List<GameObject>();
+        AddGoal("Wake up Resident");
+
         StartCoroutine("GameScript");
 
     }
