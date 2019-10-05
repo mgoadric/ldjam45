@@ -2455,6 +2455,16 @@ PrefabInstance:
       propertyPath: m_text
       value: Haunt Goals
       objectReference: {fileID: 0}
+    - target: {fileID: 8538232932573902344, guid: 04625244f6e4844a8b71ddf78fa436f7,
+        type: 3}
+      propertyPath: m_fontSize
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 8538232932573902344, guid: 04625244f6e4844a8b71ddf78fa436f7,
+        type: 3}
+      propertyPath: m_fontSizeBase
+      value: 40
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 04625244f6e4844a8b71ddf78fa436f7, type: 3}
 --- !u!224 &189481860 stripped
