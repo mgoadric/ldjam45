@@ -9,6 +9,7 @@ public class Manager : MonoBehaviour
 
     public State gameState;
 
+    public GameObject canvas;
     public GameObject goalbar;
     private List<GameObject> currentGoals;
 
@@ -41,19 +42,25 @@ public class Manager : MonoBehaviour
 
     void AddGoal(string goal)
     {
-        GameObject bar = Instantiate(goalbar);
+        GameObject bar = Instantiate(goalbar, canvas.transform);
         Vector3 temp = bar.transform.position;
-        temp.y += 50 * currentGoals.Count;
+        temp.y -= 75 * currentGoals.Count;
         bar.transform.position = temp;
         // add in the goal text
 
         currentGoals.Add(bar);
+        Debug.Log("Added in " + goal);
     }
 
     public void StartGame()
     {
         currentGoals = new List<GameObject>();
         AddGoal("Wake up Resident");
+        AddGoal("Do more!");
+        AddGoal("Wake up Resident");
+        AddGoal("Do more!");
+        AddGoal("Wake up Resident");
+        AddGoal("Do more!");
 
         StartCoroutine("GameScript");
 
