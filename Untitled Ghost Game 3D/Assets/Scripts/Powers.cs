@@ -8,14 +8,15 @@ public class Powers : MonoBehaviour
 
     public float hauntRadius;
 
-    public bool pushUnlocked;
     private bool button1Prev;
     private float button1HoldStart;
     public float button1HoldScaled;
 
+    public bool pushUnlocked;
     public float pushStrength;
     public float pushRadius;
     public float pushCD;
+    public bool holdUnlocked;
     public float holdStrength;
     public float holdRadius;
 
@@ -45,6 +46,7 @@ public class Powers : MonoBehaviour
         canPush = true;
         nextPush = 0;
         pushUnlocked = true;
+        holdUnlocked = true;
         button2Active = true;
     }
 
@@ -59,17 +61,14 @@ public class Powers : MonoBehaviour
 
     public void getInput(bool button1, bool button2)
     {
-        if (pushUnlocked)
-        {
-            if (!button1Prev && button1)
-                Button1Down();
-            else if (button1Prev && button1)
-                Button1Held();
-            else if (button1Prev && !button1)
-                Button1Up();
-            else
-                Button1NoInput();
-        }
+        if (!button1Prev && button1)
+            Button1Down();
+        else if (button1Prev && button1)
+            Button1Held();
+        else if (button1Prev && !button1)
+            Button1Up();
+        else
+            Button1NoInput();
         if (button2Active)
         {
             if (!button2Prev && button2)
@@ -104,16 +103,16 @@ public class Powers : MonoBehaviour
     private void Button1Down()
     {
         Debug.Log("Button1Down()");
-
         button1HoldStart = Time.time;
-
-        if (canPush)
+        if(pushUnlocked)
         {
-            Push();
-            nextPush = Time.time + pushCD;
-            canPush = false;
+            if (canPush)
+            {
+                Push();
+                nextPush = Time.time + pushCD;
+                canPush = false;
+            }
         }
-
     }
 
     private void Button1Held()
