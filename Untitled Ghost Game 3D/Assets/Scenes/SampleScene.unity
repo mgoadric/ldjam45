@@ -8745,6 +8745,8 @@ MonoBehaviour:
   gameState: 0
   canvas: {fileID: 965458450}
   goalbar: {fileID: 851296619704182958, guid: 04625244f6e4844a8b71ddf78fa436f7, type: 3}
+  completedGoalSprite: {fileID: 21300000, guid: 60663b0dc2388465eb61ce8269b39538,
+    type: 3}
   instructions: {fileID: 0}
 --- !u!4 &869279893
 Transform:

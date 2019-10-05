@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public enum State { START, MIDDLE, END }
 
@@ -12,6 +14,7 @@ public class Manager : MonoBehaviour
 
     public GameObject canvas;
     public GameObject goalbar;
+    public Sprite completedGoalSprite;
     private List<GameObject> currentGoals;
 
     public GameObject instructions;
@@ -44,6 +47,11 @@ public class Manager : MonoBehaviour
     void AddGoal(string goal)
     {
         // make previous goal dark
+        if (currentGoals.Count > 0)
+        {
+            GameObject prev = currentGoals[currentGoals.Count - 1];
+            prev.GetComponent<Image>().sprite = completedGoalSprite;
+        }
 
         GameObject bar = Instantiate(goalbar, canvas.transform);
         Vector3 temp = bar.transform.position;
