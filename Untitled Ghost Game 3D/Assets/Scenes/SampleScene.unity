@@ -374,6 +374,8 @@ MonoBehaviour:
   moveSpeed: 5
   pushStrength: 200
   pushRadius: 10
+  pushEffect: {fileID: 2417552227695126670, guid: 8d7798a75e1f43943ab226cd87e8835a,
+    type: 3}
 --- !u!136 &24822946
 CapsuleCollider:
   m_ObjectHideFlags: 0

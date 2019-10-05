@@ -10,6 +10,7 @@ public class Ghost : MonoBehaviour
     public float pushStrength;
     public float pushRadius;
     private bool hasPushed;
+    public GameObject pushEffect;
 
 
     // Start is called before the first frame update
@@ -45,6 +46,7 @@ public class Ghost : MonoBehaviour
     {        
         if(!hasPushed)
         {
+            Instantiate(pushEffect, transform.position, Quaternion.identity);
             Debug.Log(message: "Pushing, radius=" + radius);
             Collider[] hitColliders = Physics.OverlapSphere(rb.position, radius);
             int i = 0;
