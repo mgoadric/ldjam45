@@ -5,12 +5,12 @@ using UnityEngine;
 public class Powers : MonoBehaviour
 {
     private Transform tf;
-    public bool button1Prev;
-    private float button1HoldTime;
+    private bool button1Prev;
+    private float button1HoldStart;
     public float button1HoldScaled;
 
     private bool button2Prev;
-    private float button2HoldTime;
+    private float button2HoldStart;
     public float button2HoldScaled;
 
 
@@ -30,6 +30,8 @@ public class Powers : MonoBehaviour
     void Start()
     {
         tf = GetComponent<Transform>();
+        button1HoldScaled = -1;
+        button2HoldScaled = -1;
         canPush = true;
         nextPush =0;
     }
@@ -37,7 +39,10 @@ public class Powers : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Time.time > nextPush)
+        {
+            canPush = true;
+        }
     }
 
     public void getInput(bool button1, bool button2)
@@ -87,17 +92,31 @@ public class Powers : MonoBehaviour
     private void Button1Down()
     {
         Debug.Log("Button1Down()");
-        Push();
+
+        button1HoldStart = Time.time;
+
+        if(canPush)
+        {
+            Push();
+            nextPush = Time.time + pushCD;
+            canPush = false;
+        }
+        
     }
 
     private void Button1Held()
     {
         Debug.Log("Button1Held()");
+
+        button1HoldScaled = Time.time - button1HoldStart;
     }
 
     private void Button1Up()
     {
         Debug.Log("Button1Up()");
+        button1HoldScaled = -1;
+
+
         if (Time.time > nextPush)
         {
             canPush = true;
@@ -108,16 +127,20 @@ public class Powers : MonoBehaviour
     private void Button2Down()
     {
         Debug.Log("Button2Down()");
+        button2HoldStart = Time.time;
     }
 
     private void Button2Held()
     {
         Debug.Log("Button2Held()");
+        button2HoldScaled = Time.time - button2HoldStart;
     }
     
     private void Button2Up()
     {
         Debug.Log("Button2Up()");
+        button2HoldScaled = -1;
+
     }
 
     public void Push()
@@ -142,7 +165,5 @@ public class Powers : MonoBehaviour
             i++;
         }
         Debug.Log(message: objectForces);
-        nextPush = Time.time + pushCD;
-        canPush = false;
     }
 }
