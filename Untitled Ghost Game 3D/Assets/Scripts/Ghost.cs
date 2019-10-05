@@ -28,13 +28,7 @@ public class Ghost : MonoBehaviour
             rb.AddForce(Vector3.forward * moveSpeed);
         if (Input.GetKey(KeyCode.S))
             rb.AddForce(Vector3.back * moveSpeed);
-        if (Input.GetKey(KeyCode.Space))
-        {
-            powers.SpacePressed();
-        } else
-        {
-            powers.NoInput();
-        }
+        powers.getInput(Input.GetKey(KeyCode.J), Input.GetKey(KeyCode.K));
 
     }
 }
