@@ -9,12 +9,14 @@ public class Ghost : MonoBehaviour
     public float moveSpeed;
     public float pushStrength;
     public float pushRadius;
+    private bool hasPushed;
 
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        hasPushed = false;
     }
 
     // Update is called once per frame
@@ -30,21 +32,38 @@ public class Ghost : MonoBehaviour
         if (Input.GetKey(KeyCode.S))
             rb.AddForce(Vector3.back * moveSpeed);
         if (Input.GetKey(KeyCode.Space))
+        {
             Push(pushRadius);
+        } else
+        {
+            hasPushed = false;
+        }
 
     }
 
     private void Push(float radius)
-    {
-        Debug.Log(message: "Pushing, radius=" + radius);
-        Collider[] hitColliders = Physics.OverlapSphere(rb.position, radius);
-        int i = 0;
-        string objectNames = "";
-        while (i < hitColliders.Length)
+    {        
+        if(!hasPushed)
         {
-            objectNames += hitColliders[i].name;
-            i++;
+            Debug.Log(message: "Pushing, radius=" + radius);
+            Collider[] hitColliders = Physics.OverlapSphere(rb.position, radius);
+            int i = 0;
+            string objectForces = "";
+            while (i < hitColliders.Length)
+            {
+                GameObject hitObject = hitColliders[i].gameObject;
+                Vector3 heading = hitObject.transform.position - rb.position;
+                var distance = heading.magnitude;
+                if (hitObject.tag == "Moveable")
+                {
+                    Vector3 pushForce = (heading / distance * (1 / distance) * pushStrength);
+                    hitObject.GetComponent<Rigidbody>().AddForce(pushForce);
+                    objectForces += " hit " + hitObject.name + " with force " + pushForce.magnitude;
+                }
+                i++;
+            }
+            Debug.Log(message: objectForces);
+            hasPushed = true;
         }
-        Debug.Log(message: objectNames);
     }
 }
