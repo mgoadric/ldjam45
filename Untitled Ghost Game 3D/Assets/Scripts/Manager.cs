@@ -19,7 +19,7 @@ public class Manager : MonoBehaviour
     public GameObject introscreen;
 
     public GameObject pulseInfoGui;
-    public GameObject elecInfoGui;
+    public GameObject holdInfoGui;
 
     public GameObject cat;
     public GameObject resident;
@@ -53,7 +53,7 @@ public class Manager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.O))
             pulseInfoGui.SetActive(true);
         if (Input.GetKeyDown(KeyCode.P))
-            elecInfoGui.SetActive(true);
+            holdInfoGui.SetActive(true);
     }
 
     void WipeBar()
@@ -154,6 +154,7 @@ public class Manager : MonoBehaviour
                 gameState = State.CATCHILL;
                 AddGoal("Chill the cat.");
                 resident.GetComponent<Resident>().Dialog("Is that\nyou, Tabi?", 4f);
+                cat.GetComponent<AudioSource>().Play(0);
             }
         }
 
@@ -172,6 +173,7 @@ public class Manager : MonoBehaviour
 
         // activate pulse
         ghost.transform.GetChild(0).GetComponent<Powers>().pushUnlocked = true;
+        pulseInfoGui.SetActive(true);
 
         while (gameState == State.MIDDLE)
         {
@@ -186,6 +188,7 @@ public class Manager : MonoBehaviour
 
         // activate hold
         ghost.transform.GetChild(0).GetComponent<Powers>().holdUnlocked = true;
+        holdInfoGui.SetActive(true);
 
         while (gameState == State.END)
         {
