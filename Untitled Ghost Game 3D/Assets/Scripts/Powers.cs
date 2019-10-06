@@ -246,7 +246,7 @@ public class Powers : MonoBehaviour
                 GameObject anchor = grabAnchors[i];
                 Vector3 heading = anchor.transform.position - grabbed.transform.position;
                 var distance = heading.magnitude;
-                Vector3 holdForce = -heading;
+                Vector3 holdForce = -heading*(.05f*distance);
                 grabbedObjects[i].GetComponent<Rigidbody>().AddForce(heading);
 
 
