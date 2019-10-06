@@ -216,6 +216,11 @@ public class Powers : MonoBehaviour
                 k++;
             i++;
         }
+        grabbedObjects = new GameObject[k];
+        grabAnchors = new GameObject[k];
+        i = 0;
+        k = 0;
+
         GameObject hitObject = holdColliders[i].gameObject;
         GameObject grabPoint = new GameObject("grab_" + hitObject.name);
         grabAnchors[k] = new GameObject();
