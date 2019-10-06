@@ -33,7 +33,7 @@ public class Powers : MonoBehaviour
     private float button2HoldStart;
     public float button2HoldScaled;
 
-
+    private AudioSource audioData;
 
 
 
@@ -52,6 +52,7 @@ public class Powers : MonoBehaviour
         pushUnlocked = true;
         holdUnlocked = true;
         button2Active = true;
+        audioData = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -179,6 +180,7 @@ public class Powers : MonoBehaviour
 
     private void Push()
     {
+        audioData.Play(0);
         GameObject particles = Instantiate(pushEffect, transform.position, Quaternion.identity);
         Destroy(particles, particles.GetComponent<ParticleSystem>().main.duration);
         Debug.Log(message: "Pushing, radius=" + pushRadius);
