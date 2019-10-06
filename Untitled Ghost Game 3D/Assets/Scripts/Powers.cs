@@ -241,7 +241,6 @@ public class Powers : MonoBehaviour
                 GameObject hitObject = holdColliders[i].gameObject;
                 GameObject grabPoint = new GameObject(("grab_" + hitObject.name));
                 GameObject grabParticle = Instantiate(grabEffect, hitObject.transform.position,Quaternion.identity);
-                grabParticle.transform.parent = hitObject.transform;
                 grabPoint.transform.position = hitObject.transform.position;
                 grabPoint.transform.parent = tf;
                 grabbedObjects[k] = hitObject;
@@ -263,6 +262,7 @@ public class Powers : MonoBehaviour
             {
                 GameObject grabbed = grabbedObjects[i];
                 GameObject anchor = grabAnchors[i];
+                grabParticles[i].GetComponent<Transform>().position = grabbed.transform.position;
                 Vector3 heading = anchor.transform.position - grabbed.transform.position;
                 var distance = heading.magnitude;
                 Vector3 holdForce = -heading*(.05f*distance);
