@@ -18,6 +18,7 @@ public class Powers : MonoBehaviour
     public float pushCD;
     private float nextPush;
     private bool canPush;
+    public GameObject pushEffect;
 
     public bool holdUnlocked;
     public bool isHolding;
@@ -26,6 +27,8 @@ public class Powers : MonoBehaviour
     public float holdDelay;
     public GameObject[] grabbedObjects;
     public GameObject[] grabAnchors;
+    public GameObject[] grabParticles;
+    public GameObject grabEffect;
     
     
     public bool button2Active;
@@ -38,7 +41,7 @@ public class Powers : MonoBehaviour
 
 
 
-    public GameObject pushEffect;
+    
 
 
     // Start is called before the first frame update
@@ -227,6 +230,7 @@ public class Powers : MonoBehaviour
         Debug.Log(message: "i=" + i + " k=" + k);
         grabbedObjects = new GameObject[k];
         grabAnchors = new GameObject[k];
+        grabParticles = new GameObject[k];
 
         i = 0;
         k = 0;
@@ -236,10 +240,13 @@ public class Powers : MonoBehaviour
             {
                 GameObject hitObject = holdColliders[i].gameObject;
                 GameObject grabPoint = new GameObject(("grab_" + hitObject.name));
+                GameObject grabParticle = Instantiate(grabEffect, hitObject.transform.position,Quaternion.identity);
+                grabParticle.transform.parent = hitObject.transform;
                 grabPoint.transform.position = hitObject.transform.position;
                 grabPoint.transform.parent = tf;
                 grabbedObjects[k] = hitObject;
                 grabAnchors[k] = grabPoint;
+                grabParticles[k] = grabParticle;
                 k++;
             }
             
@@ -272,6 +279,7 @@ public class Powers : MonoBehaviour
         int i = 0;
         while(i<grabAnchors.Length)
         {
+            Destroy(grabParticles[i]);
             Destroy(grabAnchors[i]);
             i++;
         }
