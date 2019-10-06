@@ -123,15 +123,18 @@ public class Powers : MonoBehaviour
         //Debug.Log("Button1Held()");
 
         button1HoldScaled = Time.time - button1HoldStart;
-        if (button1HoldScaled > holdDelay)
+        if (holdUnlocked)
         {
-            if (!isHolding)
+            if (button1HoldScaled > holdDelay)
             {
-                Grab();
-            }
-            else
-            {
-                Hold();
+                if (!isHolding)
+                {
+                    Grab();
+                }
+                else
+                {
+                    Hold();
+                }
             }
         }
     }
