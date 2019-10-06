@@ -5,10 +5,20 @@ using UnityEngine;
 public class FridgeDoor : MonoBehaviour
 {
     [SerializeField] private Animator fridgeAnimController;
+    AudioSource audioData;
+
+    private void Start()
+    {
+        audioData = GetComponent<AudioSource>();
+    }
 
     public void OnPush()
     {
         Debug.Log(message: "onPush");
-        fridgeAnimController.SetBool("pushed", true);
+        if (!fridgeAnimController.GetBool("pushed"))
+        {
+            fridgeAnimController.SetBool("pushed", true);
+            audioData.Play(0);
+        }
     }
 }
