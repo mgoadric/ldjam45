@@ -198,9 +198,15 @@ public class Powers : MonoBehaviour
                 hitObject.GetComponent<Rigidbody>().AddForce(pushForce);
                 objectForces += " hit " + hitObject.name + " with force " + pushForce.magnitude;
             }
+            else if (hitColliders[i].gameObject.tag == "ActionOnPush")
+            {
+                Debug.Log(message: "ActionOnPush Found!");
+                hitColliders[i].gameObject.GetComponent<FridgeDoor>().OnPush();
+            }
             i++;
         }
-        Debug.Log(message: objectForces);
+        if(objectForces != "")
+            Debug.Log(message: objectForces);
     }
 
     private void Grab()
@@ -233,6 +239,7 @@ public class Powers : MonoBehaviour
                 grabAnchors[k] = grabPoint;
                 k++;
             }
+            
             i++;
         }     
     }

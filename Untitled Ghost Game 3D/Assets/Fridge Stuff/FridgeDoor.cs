@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class FridgeDoor : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] private Animator fridgeAnimController;
 
-    // Update is called once per frame
-    void Update()
+    public void OnPush()
     {
-        
+        Debug.Log(message: "onPush");
+        fridgeAnimController.SetBool("pushed", true);
     }
 }
