@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum State { WHISPER, CHILL, MIDDLE, END }
+public enum State { WHISPER, CHILL, CATWHISPER, CATCHILL, MIDDLE, END }
 
 public class Manager : MonoBehaviour
 {
@@ -108,6 +108,8 @@ public class Manager : MonoBehaviour
     {
 
         // SETUP
+        ghost.transform.GetChild(0).GetComponent<Powers>().pushUnlocked = false;
+        ghost.transform.GetChild(0).GetComponent<Powers>().holdUnlocked = false;
 
         // WAIT FOR PLAYER TO DO SOMETHING
 
@@ -127,11 +129,52 @@ public class Manager : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
             if (resident.GetComponent<Resident>().spirit.GetComponent<Chillable>().chilled)
             {
-                gameState = State.MIDDLE;
-                AddGoal("Move the cat.");
+                gameState = State.CATWHISPER;
+                AddGoal("Wake the cat.");
                 resident.GetComponent<Resident>().Dialog("SOOO\nCOOLD!!", 4f);
             }
 
         }
+
+        while (gameState == State.CATWHISPER)
+        {
+            yield return new WaitForSeconds(0.05f);
+            if (cat.GetComponent<Resident>().spirit.GetComponent<Chillable>().whispered)
+            {
+                gameState = State.CATCHILL;
+                AddGoal("Chill the cat.");
+                resident.GetComponent<Resident>().Dialog("Is that\nyou, Tabi?", 4f);
+            }
+        }
+
+        while (gameState == State.CATCHILL)
+        {
+            yield return new WaitForSeconds(0.05f);
+            if (cat.GetComponent<Resident>().spirit.GetComponent<Chillable>().chilled)
+            {
+                gameState = State.MIDDLE;
+                WipeBar();
+                AddGoal("Open the fridge");
+                resident.GetComponent<Resident>().Dialog("Come here\nTabi!", 4f);
+            }
+
+        }
+
+        // activate pulse
+        ghost.transform.GetChild(0).GetComponent<Powers>().pushUnlocked = true;
+
+        while (gameState == State.MIDDLE)
+        {
+            yield return new WaitForSeconds(0.05f);
+        }
+
+        // activate hold
+        ghost.transform.GetChild(0).GetComponent<Powers>().holdUnlocked = true;
+
+        while (gameState == State.END)
+        {
+            yield return new WaitForSeconds(0.05f);
+        }
+
     }
 }
