@@ -17,6 +17,8 @@ public class Manager : MonoBehaviour
     private List<GameObject> currentGoals;
 
     public GameObject introscreen;
+    public GameObject instructions;
+    public GameObject goaltop;
 
     public GameObject pulseInfoGui;
     public GameObject holdInfoGui;
@@ -101,7 +103,6 @@ public class Manager : MonoBehaviour
     public void StartGame()
     {
         currentGoals = new List<GameObject>();
-        AddGoal("Wake up Resident");
 
         StartCoroutine("GameScript");
 
@@ -115,12 +116,16 @@ public class Manager : MonoBehaviour
         ghost.transform.GetChild(0).GetComponent<Powers>().holdUnlocked = false;
 
         yield return new WaitForSeconds(2f);
-        introscreen.GetComponent<Fader>().canFade = true;
+        introscreen.GetComponent<Fader>().FadeMe();
 
         yield return new WaitForSeconds(2f);
+
         // make gui show up here!
+        instructions.SetActive(true);
+        goaltop.SetActive(true);
 
         // WAKE UP THE PLAYER
+        AddGoal("Wake up Resident");
 
         while (gameState == State.WHISPER)
         {

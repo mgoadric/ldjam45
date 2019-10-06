@@ -1577,6 +1577,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoalBar
       objectReference: {fileID: 0}
+    - target: {fileID: 851296619704182958, guid: 04625244f6e4844a8b71ddf78fa436f7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7188720988280281376, guid: 04625244f6e4844a8b71ddf78fa436f7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2217,7 +2222,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &387555095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2230,7 +2235,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d84d7562dcc684b6e94296f0267a2435, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  canFade: 0
   timeToFade: 1
 --- !u!212 &387555096
 SpriteRenderer:
@@ -4299,6 +4303,8 @@ MonoBehaviour:
   completedGoalSprite: {fileID: 21300000, guid: 60663b0dc2388465eb61ce8269b39538,
     type: 3}
   introscreen: {fileID: 387555094}
+  instructions: {fileID: 1284557591}
+  goaltop: {fileID: 1139122913}
   pulseInfoGui: {fileID: 1072781791}
   holdInfoGui: {fileID: 0}
   cat: {fileID: 110234876}
@@ -5981,6 +5987,12 @@ Transform:
   m_Father: {fileID: 224742465}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1139122913 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 851296619704182958, guid: 04625244f6e4844a8b71ddf78fa436f7,
+    type: 3}
+  m_PrefabInstance: {fileID: 189481859}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1146274091
 GameObject:
   m_ObjectHideFlags: 0
@@ -11595,7 +11607,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1284557592
 RectTransform:
   m_ObjectHideFlags: 0
