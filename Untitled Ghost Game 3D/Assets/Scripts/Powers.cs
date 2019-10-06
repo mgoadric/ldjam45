@@ -104,7 +104,7 @@ public class Powers : MonoBehaviour
 
     private void Button1Down()
     {
-        Debug.Log("Button1Down()");
+        //Debug.Log("Button1Down()");
         button1HoldStart = Time.time;
         if(pushUnlocked)
         {
@@ -119,7 +119,7 @@ public class Powers : MonoBehaviour
 
     private void Button1Held()
     {
-        Debug.Log("Button1Held()");
+        //Debug.Log("Button1Held()");
 
         button1HoldScaled = Time.time - button1HoldStart;
         if (button1HoldScaled > holdDelay)
@@ -137,7 +137,7 @@ public class Powers : MonoBehaviour
 
     private void Button1Up()
     {
-        Debug.Log("Button1Up()");
+        //Debug.Log("Button1Up()");
         button1HoldScaled = -1;
 
 
@@ -216,6 +216,7 @@ public class Powers : MonoBehaviour
                 k++;
             i++;
         }
+        Debug.Log(message: "i=" + i + " k=" + k);
         grabbedObjects = new GameObject[k];
         grabAnchors = new GameObject[k];
         i = 0;
