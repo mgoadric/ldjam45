@@ -1087,9 +1087,9 @@ MonoBehaviour:
   pushCD: 0.3
   holdUnlocked: 0
   isHolding: 0
-  holdStrength: 20
-  holdRadius: 8
-  holdDelay: 0.8
+  holdStrength: 100
+  holdRadius: 6
+  holdDelay: 0.3
   grabbedObjects: []
   grabAnchors: []
   button2Active: 0

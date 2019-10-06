@@ -130,7 +130,7 @@ public class Powers : MonoBehaviour
             }
             else
             {
-
+                Hold();
             }
         }
     }
@@ -139,16 +139,13 @@ public class Powers : MonoBehaviour
     {
         //Debug.Log("Button1Up()");
         button1HoldScaled = -1;
-        isHolding = false;
-        if (Time.time > nextPush)
-        {
-            canPush = true;
-        }
+        resetGrabAnchors();
 
     }
 
     public void Button1NoInput()
     {
+        isHolding = false;
         if (Time.time > nextPush)
         {
             canPush = true;
@@ -219,24 +216,52 @@ public class Powers : MonoBehaviour
         Debug.Log(message: "i=" + i + " k=" + k);
         grabbedObjects = new GameObject[k];
         grabAnchors = new GameObject[k];
+
         i = 0;
         k = 0;
-
         while (i < holdColliders.Length)
         {
             if (holdColliders[i].gameObject.tag == "Moveable")
             {
                 GameObject hitObject = holdColliders[i].gameObject;
-
-                GameObject grabPoint = new GameObject("grab_" + hitObject.name);
-                grabAnchors[k] = new GameObject();
+                GameObject grabPoint = new GameObject(("grab_" + hitObject.name));
+                grabPoint.transform.position = hitObject.transform.position;
                 grabPoint.transform.parent = tf;
+                grabbedObjects[k] = hitObject;
+                grabAnchors[k] = grabPoint;
                 k++;
             }
             i++;
+        }     
+    }
+
+    private void Hold()
+    {
+        if(grabbedObjects.Length==grabAnchors.Length)
+        {
+            int i = 0;
+            while(i<grabAnchors.Length)
+            {
+                GameObject grabbed = grabbedObjects[i];
+                GameObject anchor = grabAnchors[i];
+                Vector3 heading = anchor.transform.position - grabbed.transform.position;
+                var distance = heading.magnitude;
+                Vector3 holdForce = -heading;
+                grabbedObjects[i].GetComponent<Rigidbody>().AddForce(heading);
+
+
+                i++;
+            }
         }
+    }
 
-
-        
+    private void resetGrabAnchors()
+    {
+        int i = 0;
+        while(i<grabAnchors.Length)
+        {
+            Destroy(grabAnchors[i]);
+            i++;
+        }
     }
 }
