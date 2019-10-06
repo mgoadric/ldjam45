@@ -11,6 +11,7 @@ public class Resident : MonoBehaviour
     private NavMeshAgent agent;
 
     public GameObject dialogBubble;
+    public GameObject spirit;
 
     private bool talking;
 
@@ -38,6 +39,11 @@ public class Resident : MonoBehaviour
         yield return new WaitForSeconds(duration);
         talking = false;
         Destroy(go);
+    }
+
+    public void SetDestination(Transform dest)
+    {
+        agent.destination = dest.position;
     }
 
     // Start is called before the first frame update

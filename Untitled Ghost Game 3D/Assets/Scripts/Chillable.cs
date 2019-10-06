@@ -25,7 +25,7 @@ public class Chillable : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Trigger for chilling!");
-        stayCount = 0;
+        stayCount = 0f;
     }
 
     // stayCount allows the OnTriggerStay to be displayed less often
@@ -43,6 +43,7 @@ public class Chillable : MonoBehaviour
             chilled |= stayCount > 3.0f;
         } else if (!whispered)
         {
+            Debug.Log("Just whispered for " + stayCount);
             whispered |= stayCount > 5.0f;
         }
     }
