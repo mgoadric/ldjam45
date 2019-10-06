@@ -116,13 +116,13 @@ public class Manager : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
             if (resident.GetComponent<Resident>().spirit.GetComponent<Chillable>().whispered)
             {
-                gameState = State.MIDDLE;
+                gameState = State.CHILL;
                 AddGoal("Make him cold.");
                 resident.GetComponent<Resident>().Dialog("Who's\nthere?", 4f);
             }
         }
 
-        while (gameState == State.MIDDLE)
+        while (gameState == State.CHILL)
         {
             yield return new WaitForSeconds(0.05f);
             if (resident.GetComponent<Resident>().spirit.GetComponent<Chillable>().chilled)
