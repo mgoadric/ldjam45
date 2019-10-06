@@ -2,18 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum FloatState { WHISPERING, CHILLING, NONE};
+
 public class Chillable : MonoBehaviour
 {
 
     private float stayCount = 0.0f;
     public bool chilled;
     public bool whispered;
+    public FloatState mystate;
     private AudioSource audioData;
+    public AudioClip chill;
 
     // Start is called before the first frame update
     void Start()
     {
         audioData = GetComponent<AudioSource>();
+        mystate = FloatState.NONE;
     }
 
     // Update is called once per frame
@@ -25,11 +30,15 @@ public class Chillable : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger for chilling!");
+        Debug.Log("Trigger for whispers and chilling!");
         stayCount = 0f;
-        if (!chilled)
+        if (!whispered)
         {
             audioData.Play(0);
+            mystate = FloatState.WHISPERING;
+        } else if (!chilled) {
+            audioData.PlayOneShot(chill);
+            mystate = FloatState.CHILLING;
         }
     }
 
@@ -38,25 +47,24 @@ public class Chillable : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         stayCount = stayCount + Time.deltaTime;
+        if (mystate == FloatState.WHISPERING && !whispered)
+        {
+            if (stayCount > 3.0f)
+            {
+                whispered = true;
+            }
+        } else if (mystate == FloatState.CHILLING && !chilled)
+        {
+            if (stayCount > 5.0f)
+            {
+                chilled = true;
+            }
+        }
     }
 
     private void OnTriggerExit(Collider other)
     {
-        if (!chilled)
-        {
-            Debug.Log("Just chilled for " + stayCount);
-            if (stayCount > 3.0f)
-            {
-                chilled = true;
-            }
-            else
-            {
-                audioData.Stop();
-            }
-            } else if (!whispered)
-        {
-            Debug.Log("Just whispered for " + stayCount);
-            whispered |= stayCount > 5.0f;
-        }
+        audioData.Stop();
+        mystate = FloatState.NONE;
     }
 }

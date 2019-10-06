@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum State { CHILL, MIDDLE, END }
+public enum State { WHISPER, CHILL, MIDDLE, END }
 
 public class Manager : MonoBehaviour
 {
@@ -25,12 +25,9 @@ public class Manager : MonoBehaviour
 
     public static Manager S;
 
-    private AudioSource audioData;
-
     private void Awake()
     {
         S = this;
-        audioData = GetComponent<AudioSource>();
         Debug.Log("Starting");
     }
 
@@ -114,21 +111,26 @@ public class Manager : MonoBehaviour
 
         // WAIT FOR PLAYER TO DO SOMETHING
 
-        while (gameState == State.CHILL)
+        while (gameState == State.WHISPER)
         {
             yield return new WaitForSeconds(0.05f);
-            if (resident.GetComponent<Resident>().spirit.GetComponent<Chillable>().chilled)
+            if (resident.GetComponent<Resident>().spirit.GetComponent<Chillable>().whispered)
             {
                 gameState = State.MIDDLE;
-                AddGoal("Move the cat.");
-                resident.GetComponent<Resident>().Dialog("SOOO COLD!", 4f);
-                audioData.Play(0);
+                AddGoal("Make him cold.");
+                resident.GetComponent<Resident>().Dialog("Who's\nthere?", 4f);
             }
         }
 
         while (gameState == State.MIDDLE)
         {
             yield return new WaitForSeconds(0.05f);
+            if (resident.GetComponent<Resident>().spirit.GetComponent<Chillable>().chilled)
+            {
+                gameState = State.MIDDLE;
+                AddGoal("Move the cat.");
+                resident.GetComponent<Resident>().Dialog("SOOO\nCOOLD!!", 4f);
+            }
 
         }
     }
