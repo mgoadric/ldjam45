@@ -7,6 +7,7 @@ public class Cat : MonoBehaviour
 {
 
     public Transform goal;
+    public GameObject spirit;
 
     // Start is called before the first frame update
     void Start()

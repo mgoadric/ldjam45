@@ -139,7 +139,7 @@ public class Manager : MonoBehaviour
         while (gameState == State.CATWHISPER)
         {
             yield return new WaitForSeconds(0.05f);
-            if (cat.GetComponent<Resident>().spirit.GetComponent<Chillable>().whispered)
+            if (cat.GetComponent<Cat>().spirit.GetComponent<Chillable>().whispered)
             {
                 gameState = State.CATCHILL;
                 AddGoal("Chill the cat.");
@@ -150,7 +150,7 @@ public class Manager : MonoBehaviour
         while (gameState == State.CATCHILL)
         {
             yield return new WaitForSeconds(0.05f);
-            if (cat.GetComponent<Resident>().spirit.GetComponent<Chillable>().chilled)
+            if (cat.GetComponent<Cat>().spirit.GetComponent<Chillable>().chilled)
             {
                 gameState = State.MIDDLE;
                 WipeBar();
