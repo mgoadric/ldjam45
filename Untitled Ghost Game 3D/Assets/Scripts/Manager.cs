@@ -16,6 +16,8 @@ public class Manager : MonoBehaviour
     public Sprite completedGoalSprite;
     private List<GameObject> currentGoals;
 
+    public GameObject introscreen;
+
     public GameObject pulseInfoGui;
     public GameObject elecInfoGui;
 
@@ -112,7 +114,13 @@ public class Manager : MonoBehaviour
         ghost.transform.GetChild(0).GetComponent<Powers>().pushUnlocked = false;
         ghost.transform.GetChild(0).GetComponent<Powers>().holdUnlocked = false;
 
-        // WAIT FOR PLAYER TO DO SOMETHING
+        yield return new WaitForSeconds(2f);
+        introscreen.GetComponent<Fader>().canFade = true;
+
+        yield return new WaitForSeconds(2f);
+        // make gui show up here!
+
+        // WAKE UP THE PLAYER
 
         while (gameState == State.WHISPER)
         {
@@ -137,6 +145,7 @@ public class Manager : MonoBehaviour
 
         }
 
+        cat.GetComponent<Cat>().spirit.GetComponent<BoxCollider>().enabled = true;
         while (gameState == State.CATWHISPER)
         {
             yield return new WaitForSeconds(0.05f);

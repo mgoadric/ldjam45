@@ -4,21 +4,21 @@ using UnityEngine;
 
 public class Fader : MonoBehaviour
 {
-    private bool canFade;
+    public bool canFade;
     private Color alphaColor;
-    private float timeToFade = 1.0f;
+    public float timeToFade = 1.0f;
 
     public void Start()
     {
         canFade = false;
-        alphaColor = GetComponent<MeshRenderer>().material.color;
+        alphaColor = GetComponent<SpriteRenderer>().material.color;
         alphaColor.a = 0;
     }
     public void Update()
     {
-        if (canFade)
+        if (canFade && GetComponent<SpriteRenderer>().material.color.a > 0.01f)
         {
-            GetComponent<MeshRenderer>().material.color = Color.Lerp(GetComponent<MeshRenderer>().material.color, alphaColor, timeToFade * Time.deltaTime);
+            GetComponent<SpriteRenderer>().material.color = Color.Lerp(GetComponent<SpriteRenderer>().material.color, alphaColor, timeToFade * Time.deltaTime);
         }
     }
 
