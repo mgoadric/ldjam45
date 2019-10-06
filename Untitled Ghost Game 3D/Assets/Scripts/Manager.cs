@@ -22,6 +22,7 @@ public class Manager : MonoBehaviour
     public GameObject cat;
     public GameObject resident;
     public GameObject ghost;
+    public GameObject fridge;
 
     public static Manager S;
 
@@ -166,6 +167,12 @@ public class Manager : MonoBehaviour
         while (gameState == State.MIDDLE)
         {
             yield return new WaitForSeconds(0.05f);
+            if (fridge.GetComponent<Animator>().GetBool("pushed"))
+            {
+                gameState = State.END;
+                AddGoal("Cook a meal.");
+                resident.GetComponent<Resident>().Dialog("More noises?", 4f);
+            }
         }
 
         // activate hold

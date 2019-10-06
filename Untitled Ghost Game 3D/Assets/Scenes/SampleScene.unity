@@ -4111,6 +4111,7 @@ MonoBehaviour:
   cat: {fileID: 110234876}
   resident: {fileID: 1115389946}
   ghost: {fileID: 24822944}
+  fridge: {fileID: 554338482}
 --- !u!4 &869279893
 Transform:
   m_ObjectHideFlags: 0
