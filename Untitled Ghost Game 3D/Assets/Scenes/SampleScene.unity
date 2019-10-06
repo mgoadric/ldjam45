@@ -2987,7 +2987,7 @@ Transform:
   m_GameObject: {fileID: 224742464}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 4, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 285605902}
   - {fileID: 1580277277}
@@ -11259,7 +11259,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   goal1: {fileID: 1551126629}
   goal2: {fileID: 1519288345}
-  dialogBubble: {fileID: 0}
+  dialogBubble: {fileID: 3203553607432620806, guid: e2d745c4ffe334768a2e0f72cfde8372,
+    type: 3}
 --- !u!65 &1115389948
 BoxCollider:
   m_ObjectHideFlags: 0

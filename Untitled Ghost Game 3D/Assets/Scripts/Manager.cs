@@ -41,7 +41,10 @@ public class Manager : MonoBehaviour
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Y))
+        {
             AddGoal("Do Next Thing");
+            resident.GetComponent<Resident>().Dialog("what was\nthat?", 2f);
+        }
         if (Input.GetKeyDown(KeyCode.U))
             WipeBar();
         if (Input.GetKeyDown(KeyCode.O))
