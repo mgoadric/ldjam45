@@ -16,14 +16,18 @@ public class Powers : MonoBehaviour
     public float pushStrength;
     public float pushRadius;
     public float pushCD;
-    public bool holdUnlocked;
-    public float holdStrength;
-    public float holdRadius;
-
     private float nextPush;
     private bool canPush;
-    private GameObject[] grabPoints;
 
+    public bool holdUnlocked;
+    public bool isHolding;
+    public float holdStrength;
+    public float holdRadius;
+    public float holdDelay;
+    public GameObject[] grabbedObjects;
+    public GameObject[] grabAnchors;
+    
+    
     public bool button2Active;
     private bool button2Prev;
     private float button2HoldStart;
@@ -69,17 +73,15 @@ public class Powers : MonoBehaviour
             Button1Up();
         else
             Button1NoInput();
-        if (button2Active)
-        {
-            if (!button2Prev && button2)
-                Button2Down();
-            else if (button2Prev && button2)
-                Button2Held();
-            else if (button2Prev && !button2)
-                Button2Up();
-            else
-                Button2NoInput();
-        }
+
+        if (!button2Prev && button2)
+            Button2Down();
+        else if (button2Prev && button2)
+            Button2Held();
+        else if (button2Prev && !button2)
+            Button2Up();
+        else
+            Button2NoInput();
 
         button1Prev = button1;
         button2Prev = button2;
@@ -120,6 +122,17 @@ public class Powers : MonoBehaviour
         Debug.Log("Button1Held()");
 
         button1HoldScaled = Time.time - button1HoldStart;
+        if (button1HoldScaled > holdDelay)
+        {
+            if (!isHolding)
+            {
+                Grab();
+            }
+            else
+            {
+
+            }
+        }
     }
 
     private void Button1Up()
@@ -192,13 +205,20 @@ public class Powers : MonoBehaviour
         Debug.Log(message: objectForces);
     }
 
-    private void Hold()
+    private void Grab()
     {
         Collider[] holdColliders = Physics.OverlapSphere(tf.position, holdRadius);
         int i = 0;
-        while (i < holdColliders.Length)
-        {
-
+        int k = 0;
+        while (i < holdColliders.Length)    
+        {   
+            if (holdColliders[i].gameObject.tag == "Moveable")
+                k++;
+            i++;
         }
+        GameObject hitObject = holdColliders[i].gameObject;
+        GameObject grabPoint = new GameObject("grab_" + hitObject.name);
+        grabAnchors[k] = new GameObject();
+        grabPoint.transform.parent = tf;
     }
 }

@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.5748171, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1086,8 +1086,12 @@ MonoBehaviour:
   pushRadius: 5
   pushCD: 0.3
   holdUnlocked: 0
-  holdStrength: 0
+  isHolding: 0
+  holdStrength: 20
   holdRadius: 8
+  holdDelay: 0.8
+  grabbedObjects: []
+  grabAnchors: []
   button2Active: 0
   button2HoldScaled: 0
   pushEffect: {fileID: 2417552227695126670, guid: 8d7798a75e1f43943ab226cd87e8835a,
