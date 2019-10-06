@@ -25,9 +25,12 @@ public class Manager : MonoBehaviour
 
     public static Manager S;
 
+    private AudioSource audioData;
+
     private void Awake()
     {
         S = this;
+        audioData = GetComponent<AudioSource>();
         Debug.Log("Starting");
     }
 
@@ -119,6 +122,7 @@ public class Manager : MonoBehaviour
                 gameState = State.MIDDLE;
                 AddGoal("Move the cat.");
                 resident.GetComponent<Resident>().Dialog("SOOO COLD!", 4f);
+                audioData.Play(0);
             }
         }
 

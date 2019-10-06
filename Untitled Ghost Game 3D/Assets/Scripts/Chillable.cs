@@ -8,11 +8,12 @@ public class Chillable : MonoBehaviour
     private float stayCount = 0.0f;
     public bool chilled;
     public bool whispered;
+    private AudioSource audioData;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        audioData = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -26,6 +27,10 @@ public class Chillable : MonoBehaviour
     {
         Debug.Log("Trigger for chilling!");
         stayCount = 0f;
+        if (!chilled)
+        {
+            audioData.Play(0);
+        }
     }
 
     // stayCount allows the OnTriggerStay to be displayed less often
@@ -40,8 +45,15 @@ public class Chillable : MonoBehaviour
         if (!chilled)
         {
             Debug.Log("Just chilled for " + stayCount);
-            chilled |= stayCount > 3.0f;
-        } else if (!whispered)
+            if (stayCount > 3.0f)
+            {
+                chilled = true;
+            }
+            else
+            {
+                audioData.Stop();
+            }
+            } else if (!whispered)
         {
             Debug.Log("Just whispered for " + stayCount);
             whispered |= stayCount > 5.0f;
