@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wall
   - Moveable
+  - ActionOnPush
   layers:
   - Default
   - TransparentFX
