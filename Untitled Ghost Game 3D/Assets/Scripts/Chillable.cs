@@ -24,6 +24,7 @@ public class Chillable : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Trigger for chilling!");
         stayCount = 0;
     }
 
@@ -38,6 +39,7 @@ public class Chillable : MonoBehaviour
     {
         if (!chilled)
         {
+            Debug.Log("Just chilled for " + stayCount);
             chilled |= stayCount > 3.0f;
         } else if (!whispered)
         {
