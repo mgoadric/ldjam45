@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum State { START, MIDDLE, END }
+public enum State { CHILL, MIDDLE, END }
 
 public class Manager : MonoBehaviour
 {
@@ -80,7 +80,7 @@ public class Manager : MonoBehaviour
             GameObject bar = Instantiate(goalbar, canvas.transform);
             Vector3 temp = bar.transform.position;
 
-            float shrink = Screen.height / 900f; 
+            float shrink = Screen.height / 900f;
 
             temp.y -= 65 * shrink * currentGoals.Count;
             bar.transform.position = temp;
@@ -111,10 +111,21 @@ public class Manager : MonoBehaviour
 
         // WAIT FOR PLAYER TO DO SOMETHING
 
-        while (gameState == State.START)
+        while (gameState == State.CHILL)
         {
             yield return new WaitForSeconds(0.05f);
+            if (resident.GetComponent<Resident>().spirit.GetComponent<Chillable>().chilled)
+            {
+                gameState = State.MIDDLE;
+                AddGoal("Move the cat.");
+                resident.GetComponent<Resident>().Dialog("SOOO COLD!", 4f);
+            }
         }
 
+        while (gameState == State.MIDDLE)
+        {
+            yield return new WaitForSeconds(0.05f);
+
+        }
     }
 }

@@ -11,6 +11,7 @@ public class Resident : MonoBehaviour
     private NavMeshAgent agent;
 
     public GameObject dialogBubble;
+    public GameObject spirit;
 
     private bool talking;
 
