@@ -139,8 +139,7 @@ public class Powers : MonoBehaviour
     {
         //Debug.Log("Button1Up()");
         button1HoldScaled = -1;
-
-
+        isHolding = false;
         if (Time.time > nextPush)
         {
             canPush = true;
@@ -207,6 +206,7 @@ public class Powers : MonoBehaviour
 
     private void Grab()
     {
+        isHolding = true;
         Collider[] holdColliders = Physics.OverlapSphere(tf.position, holdRadius);
         int i = 0;
         int k = 0;
@@ -222,9 +222,21 @@ public class Powers : MonoBehaviour
         i = 0;
         k = 0;
 
-        GameObject hitObject = holdColliders[i].gameObject;
-        GameObject grabPoint = new GameObject("grab_" + hitObject.name);
-        grabAnchors[k] = new GameObject();
-        grabPoint.transform.parent = tf;
+        while (i < holdColliders.Length)
+        {
+            if (holdColliders[i].gameObject.tag == "Moveable")
+            {
+                GameObject hitObject = holdColliders[i].gameObject;
+
+                GameObject grabPoint = new GameObject("grab_" + hitObject.name);
+                grabAnchors[k] = new GameObject();
+                grabPoint.transform.parent = tf;
+                k++;
+            }
+            i++;
+        }
+
+
+        
     }
 }
