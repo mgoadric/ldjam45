@@ -31,6 +31,10 @@ public class Manager : MonoBehaviour
     public GameObject showerLoc;
     public GameObject bed1;
     public GameObject bed2;
+    public GameObject stoveloc;
+    public GameObject downstairs1;
+    public GameObject carloc;
+    public GameObject stairs;
 
     public static Manager S;
 
@@ -132,6 +136,8 @@ public class Manager : MonoBehaviour
 
         // WAKE UP THE PLAYER
         AddGoal("Wake up Resident");
+        resident.GetComponent<Resident>().Dialog("ZZzzZ\nzzZZZzZ", 2f);
+
 
         pulseInfoGui.SetActive(true);
         pulseInfoGui.GetComponent<TextMeshProUGUI>().SetText("Hover to whisper");
@@ -181,6 +187,7 @@ public class Manager : MonoBehaviour
         }
 
         resident.GetComponent<Resident>().SetDestination(bed2.transform);
+        cat.GetComponent<Cat>().Waffle(downstairs1.transform, stairs.transform);
 
         while (gameState == State.CATCHILL)
         {
@@ -194,6 +201,7 @@ public class Manager : MonoBehaviour
             }
         }
 
+        cat.GetComponent<Cat>().StopWaffle();
         cat.GetComponent<Cat>().SetDestination(resident.transform);
         holdInfoGui.SetActive(false);
         pulseInfoGui.GetComponent<TextMeshProUGUI>().SetText("Tap J to Push");
@@ -214,6 +222,9 @@ public class Manager : MonoBehaviour
             }
         }
 
+        resident.GetComponent<Resident>().SetDestination(stairs.transform);
+        cat.GetComponent<Cat>().SetDestination(downstairs1.transform);
+
         // activate hold
         ghost.transform.GetChild(0).GetComponent<Powers>().holdUnlocked = true;
         holdInfoGui.SetActive(true);
@@ -222,7 +233,20 @@ public class Manager : MonoBehaviour
         while (gameState == State.END)
         {
             yield return new WaitForSeconds(0.05f);
+            // finished when can cooking on stove
         }
+
+        // resident goes to stove and eats
+        resident.GetComponent<Resident>().SetDestination(stoveloc.transform);
+
+        // then they try to find their car keys
+        resident.GetComponent<Resident>().Waffle(bed2.transform, downstairs1.transform);
+
+        // keys are found, get in car and head out
+        resident.GetComponent<Resident>().StopWaffle();
+
+        resident.GetComponent<Resident>().SetDestination(carloc.transform);
+
 
     }
 }
