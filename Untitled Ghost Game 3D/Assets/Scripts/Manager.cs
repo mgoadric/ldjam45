@@ -49,6 +49,7 @@ public class Manager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.Y))
         {
             AddGoal("Do Next Thing");
@@ -60,6 +61,7 @@ public class Manager : MonoBehaviour
             pulseInfoGui.SetActive(true);
         if (Input.GetKeyDown(KeyCode.P))
             holdInfoGui.SetActive(true);
+            */          
     }
 
     void WipeBar()
@@ -131,6 +133,9 @@ public class Manager : MonoBehaviour
         // WAKE UP THE PLAYER
         AddGoal("Wake up Resident");
 
+        pulseInfoGui.SetActive(true);
+        pulseInfoGui.GetComponent<TextMeshProUGUI>().SetText("Hover to whisper");
+
         while (gameState == State.WHISPER)
         {
             yield return new WaitForSeconds(0.05f);
@@ -141,6 +146,9 @@ public class Manager : MonoBehaviour
                 resident.GetComponent<Resident>().Dialog("Who's\nthere?", 4f);
             }
         }
+
+        holdInfoGui.SetActive(true);
+        holdInfoGui.GetComponent<TextMeshProUGUI>().SetText("and to chill");
 
         resident.GetComponent<Resident>().Waffle(bed1.transform, bed2.transform);
 
@@ -187,6 +195,9 @@ public class Manager : MonoBehaviour
         }
 
         cat.GetComponent<Cat>().SetDestination(resident.transform);
+        holdInfoGui.SetActive(false);
+        pulseInfoGui.GetComponent<TextMeshProUGUI>().SetText("Tap J to Push");
+
 
         // activate pulse
         ghost.transform.GetChild(0).GetComponent<Powers>().pushUnlocked = true;
@@ -206,6 +217,7 @@ public class Manager : MonoBehaviour
         // activate hold
         ghost.transform.GetChild(0).GetComponent<Powers>().holdUnlocked = true;
         holdInfoGui.SetActive(true);
+        holdInfoGui.GetComponent<TextMeshProUGUI>().SetText("Hold J to Grab");
 
         while (gameState == State.END)
         {
