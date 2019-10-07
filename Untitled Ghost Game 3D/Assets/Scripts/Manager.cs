@@ -157,6 +157,8 @@ public class Manager : MonoBehaviour
             }
         }
 
+
+
         holdInfoGui.SetActive(true);
         holdInfoGui.GetComponent<TextMeshProUGUI>().SetText("and to chill");
 
@@ -297,6 +299,8 @@ public class Manager : MonoBehaviour
 
         car.GetComponent<Car>().SetDestination(awayloc.transform);
         Destroy(resident.GetComponent<Resident>().mysprite);
+
+        yield return new WaitForSeconds(4f);
 
         // Fade to credit screen
         endscreen.GetComponent<Fader>().FadeMe(255);
