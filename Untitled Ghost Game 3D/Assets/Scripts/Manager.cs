@@ -235,7 +235,7 @@ public class Manager : MonoBehaviour
         {
             yield return new WaitForSeconds(0.05f);
             // finished when can cooking on stove
-            if (stovetop.GetComponent<Stove>().cooked)
+            if (stovetop.GetComponent<StoveTop>().cooked)
             {
                 gameState = State.KEYS;
                 AddGoal("Find keys");
