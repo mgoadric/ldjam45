@@ -595,6 +595,7 @@ MonoBehaviour:
     type: 3}
   button2Active: 0
   button2HoldScaled: 0
+  pushSound: {fileID: 8300000, guid: 614d1bb6a09c74d939ba24a582c71e76, type: 3}
 --- !u!4 &71383031
 Transform:
   m_ObjectHideFlags: 0
@@ -619,11 +620,11 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 614d1bb6a09c74d939ba24a582c71e76, type: 3}
+  m_audioClip: {fileID: 8300000, guid: f732e52a8daf34767a70d9009fb6646b, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
