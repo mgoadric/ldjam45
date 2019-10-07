@@ -8,7 +8,6 @@ public class Stove : MonoBehaviour
     public float xOffset, yOffset, zOffset;
     private Transform tf;
     private bool flameOn=false;
-    public bool cooked;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +22,7 @@ public class Stove : MonoBehaviour
             Vector3 effectSource = tf.position;
             fireEffect = Instantiate(fireEffect, effectSource, Quaternion.identity);
             flameOn = true;
+            Debug.Log("Turned on the stove!");
         }
         
     }

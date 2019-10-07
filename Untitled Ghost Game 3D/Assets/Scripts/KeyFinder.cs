@@ -45,7 +45,7 @@ public class KeyFinder : MonoBehaviour
             stayCount = stayCount + Time.deltaTime;
             if (!hasKeys)
             {
-                if (stayCount > 3.0f)
+                if (stayCount > 1.0f)
                 {
                     hasKeys = true;
                     Destroy(other.gameObject);
