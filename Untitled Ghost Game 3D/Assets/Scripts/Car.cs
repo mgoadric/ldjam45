@@ -24,11 +24,13 @@ public class Car : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.layer == 10)
+        Debug.Log("Colliding with layer " + other.gameObject.layer);
+        if (other.gameObject.layer == 0)
         {
             Debug.Log("Trigger for Car!");
             if (!inCar)
             {
+                Debug.Log("Now it is true");
                 inCar = true;
             }
         }

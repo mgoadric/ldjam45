@@ -11,6 +11,7 @@ public class Resident : MonoBehaviour
     public GameObject dialogBubble;
     public GameObject spirit;
     public GameObject keyfinder;
+    public GameObject mysprite;
 
     private bool talking;
     private IEnumerator coroutine;
