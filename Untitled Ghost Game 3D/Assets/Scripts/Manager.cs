@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public enum State { WHISPER, CHILL, CATWHISPER, CATCHILL, MIDDLE, END }
+public enum State { WHISPER, CHILL, CATWHISPER, CATCHILL, OPENFRIDGE, COOK, KEYS, CAR, END }
 
 public class Manager : MonoBehaviour
 {
@@ -35,6 +35,7 @@ public class Manager : MonoBehaviour
     public GameObject downstairs1;
     public GameObject carloc;
     public GameObject stairs;
+    public GameObject stovetop;
 
     public static Manager S;
 
@@ -135,7 +136,7 @@ public class Manager : MonoBehaviour
         goaltop.SetActive(true);
 
         // WAKE UP THE PLAYER
-        AddGoal("Wake up Resident");
+        AddGoal("Wake up resident");
         resident.GetComponent<Resident>().Dialog("ZZzzZ\nzzZZZzZ", 2f);
 
 
@@ -148,7 +149,7 @@ public class Manager : MonoBehaviour
             if (resident.GetComponent<Resident>().spirit.GetComponent<Chillable>().whispered)
             {
                 gameState = State.CHILL;
-                AddGoal("Make him cold.");
+                AddGoal("Chill the resident");
                 resident.GetComponent<Resident>().Dialog("Who's\nthere?", 4f);
             }
         }
@@ -164,7 +165,7 @@ public class Manager : MonoBehaviour
             if (resident.GetComponent<Resident>().spirit.GetComponent<Chillable>().chilled)
             {
                 gameState = State.CATWHISPER;
-                AddGoal("Wake the cat.");
+                AddGoal("Wake the cat");
                 resident.GetComponent<Resident>().Dialog("SOOO\nCOOLD!!", 4f);
             }
 
@@ -180,7 +181,7 @@ public class Manager : MonoBehaviour
             if (cat.GetComponent<Cat>().spirit.GetComponent<Chillable>().whispered)
             {
                 gameState = State.CATCHILL;
-                AddGoal("Chill the cat.");
+                AddGoal("Chill the cat");
                 resident.GetComponent<Resident>().Dialog("Tabi,\nyou ok?", 4f);
                 cat.GetComponent<AudioSource>().Play(0);
             }
@@ -194,7 +195,7 @@ public class Manager : MonoBehaviour
             yield return new WaitForSeconds(0.05f);
             if (cat.GetComponent<Cat>().spirit.GetComponent<Chillable>().chilled)
             {
-                gameState = State.MIDDLE;
+                gameState = State.OPENFRIDGE;
                 WipeBar();
                 AddGoal("Open the fridge");
                 resident.GetComponent<Resident>().Dialog("Come here\nTabi!", 4f);
@@ -211,13 +212,13 @@ public class Manager : MonoBehaviour
         ghost.transform.GetChild(0).GetComponent<Powers>().pushUnlocked = true;
         pulseInfoGui.SetActive(true);
 
-        while (gameState == State.MIDDLE)
+        while (gameState == State.OPENFRIDGE)
         {
             yield return new WaitForSeconds(0.05f);
             if (fridge.GetComponent<Animator>().GetBool("pushed"))
             {
-                gameState = State.END;
-                AddGoal("Cook a meal.");
+                gameState = State.COOK;
+                AddGoal("Cook a meal");
                 resident.GetComponent<Resident>().Dialog("More noises?", 4f);
             }
         }
@@ -230,22 +231,61 @@ public class Manager : MonoBehaviour
         holdInfoGui.SetActive(true);
         holdInfoGui.GetComponent<TextMeshProUGUI>().SetText("Hold J to Grab");
 
-        while (gameState == State.END)
+        while (gameState == State.COOK)
         {
             yield return new WaitForSeconds(0.05f);
             // finished when can cooking on stove
+            if (stovetop.GetComponent<Stove>().cooked)
+            {
+                gameState = State.KEYS;
+                AddGoal("Find keys");
+                resident.GetComponent<Resident>().Dialog("That smells\ngood!", 4f);
+            }
+
         }
 
         // resident goes to stove and eats
         resident.GetComponent<Resident>().SetDestination(stoveloc.transform);
+        yield return new WaitForSeconds(5f);
+        resident.GetComponent<Resident>().Dialog("Yum!", 4f);
+        yield return new WaitForSeconds(5f);
+        resident.GetComponent<Resident>().Dialog("Where are\nmy keys?", 4f);
 
         // then they try to find their car keys
         resident.GetComponent<Resident>().Waffle(bed2.transform, downstairs1.transform);
+
+
+        while (gameState == State.KEYS)
+        {
+            yield return new WaitForSeconds(0.05f);
+            // finished when can cooking on stove
+            if (resident.GetComponent<Resident>().spirit.GetComponent<Chillable>().hasKeys)
+            {
+                gameState = State.CAR;
+                AddGoal("Good work!");
+                resident.GetComponent<Resident>().Dialog("Goodbye/nghost?", 4f);
+            }
+
+        }
 
         // keys are found, get in car and head out
         resident.GetComponent<Resident>().StopWaffle();
 
         resident.GetComponent<Resident>().SetDestination(carloc.transform);
+
+        while (gameState == State.CAR)
+        {
+            yield return new WaitForSeconds(0.05f);
+            // finished when can cooking on stove
+            if (resident.GetComponent<Resident>().spirit.GetComponent<Chillable>().inCar)
+            {
+                gameState = State.END;
+                AddGoal("You made a friend!");
+                resident.GetComponent<Resident>().Dialog("That was\nweird.", 4f);
+            }
+
+        }
+
 
 
     }

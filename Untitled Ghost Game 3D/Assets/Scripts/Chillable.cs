@@ -13,6 +13,8 @@ public class Chillable : MonoBehaviour
     public FloatState mystate;
     private AudioSource audioData;
     public AudioClip chill;
+    public bool hasKeys;
+    public bool inCar;
 
     // Start is called before the first frame update
     void Start()
