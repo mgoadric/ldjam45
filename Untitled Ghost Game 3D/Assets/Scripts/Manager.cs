@@ -36,6 +36,8 @@ public class Manager : MonoBehaviour
     public GameObject carloc;
     public GameObject stairs;
     public GameObject stovetop;
+    public GameObject car;
+    public GameObject awayloc;
 
     public static Manager S;
 
@@ -279,7 +281,7 @@ public class Manager : MonoBehaviour
         {
             yield return new WaitForSeconds(0.05f);
             // finished when can cooking on stove
-            if (resident.GetComponent<Resident>().spirit.GetComponent<Chillable>().inCar)
+            if (car.GetComponent<Car>().inCar)
             {
                 gameState = State.END;
                 AddGoal("You made a friend!");
@@ -287,6 +289,10 @@ public class Manager : MonoBehaviour
             }
 
         }
+
+        car.GetComponent<Car>().SetDestination(awayloc.transform);
+
+        // Fade to credit screen
 
     }
 }
