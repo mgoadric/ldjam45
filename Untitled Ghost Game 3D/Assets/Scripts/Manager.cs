@@ -17,6 +17,7 @@ public class Manager : MonoBehaviour
     private List<GameObject> currentGoals;
 
     public GameObject introscreen;
+    public GameObject endscreen;
     public GameObject instructions;
     public GameObject goaltop;
 
@@ -129,7 +130,7 @@ public class Manager : MonoBehaviour
         ghost.transform.GetChild(0).GetComponent<Powers>().holdUnlocked = false;
 
         yield return new WaitForSeconds(2f);
-        introscreen.GetComponent<Fader>().FadeMe();
+        introscreen.GetComponent<Fader>().FadeMe(0);
 
         yield return new WaitForSeconds(2f);
 
@@ -291,8 +292,10 @@ public class Manager : MonoBehaviour
         }
 
         car.GetComponent<Car>().SetDestination(awayloc.transform);
+        Destroy(resident.GetComponent<Resident>().mysprite);
 
         // Fade to credit screen
+        endscreen.GetComponent<Fader>().FadeMe(255);
 
     }
 }

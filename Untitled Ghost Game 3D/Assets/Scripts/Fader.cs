@@ -20,7 +20,7 @@ public class Fader : MonoBehaviour
 
     IEnumerator Fade()
     {
-        while (GetComponent<SpriteRenderer>().material.color.a > 0.01f)
+        while (Mathf.Abs(GetComponent<SpriteRenderer>().material.color.a - alphaColor.a) > 0.01f)
         {
             yield return new WaitForSeconds(Time.deltaTime);
             GetComponent<SpriteRenderer>().material.color = Color.Lerp(GetComponent<SpriteRenderer>().material.color, alphaColor, timeToFade * Time.deltaTime);
@@ -28,8 +28,9 @@ public class Fader : MonoBehaviour
         Destroy(this.gameObject);
     }
 
-    public void FadeMe()
+    public void FadeMe(int newAlpha)
     {
+        alphaColor.a = newAlpha;
         StartCoroutine("Fade");
     }
 
