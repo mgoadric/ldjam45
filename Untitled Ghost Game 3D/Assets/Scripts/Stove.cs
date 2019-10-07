@@ -8,6 +8,7 @@ public class Stove : MonoBehaviour
     public float xOffset, yOffset, zOffset;
     private Transform tf;
     private bool flameOn=false;
+    public bool cooked;
 
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,12 @@ public class Stove : MonoBehaviour
         }
         
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        
+    }
+
     public void flameOff()
     {
         Destroy(fireEffect);

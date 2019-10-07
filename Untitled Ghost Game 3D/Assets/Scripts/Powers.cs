@@ -38,7 +38,7 @@ public class Powers : MonoBehaviour
 
     private AudioSource audioData;
 
-
+    public AudioClip pushSound;
 
 
     
@@ -147,7 +147,10 @@ public class Powers : MonoBehaviour
         //Debug.Log("Button1Up()");
         button1HoldScaled = -1;
         resetGrabAnchors();
-
+        if (isHolding)
+        {
+            audioData.Stop();
+        }
     }
 
     public void Button1NoInput()
@@ -186,7 +189,7 @@ public class Powers : MonoBehaviour
 
     private void Push()
     {
-        audioData.Play(0);
+        audioData.PlayOneShot(pushSound);
         GameObject particles = Instantiate(pushEffect, transform.position, Quaternion.identity);
         Destroy(particles, particles.GetComponent<ParticleSystem>().main.duration);
         Debug.Log(message: "Pushing, radius=" + pushRadius);
@@ -222,6 +225,7 @@ public class Powers : MonoBehaviour
 
     private void Grab()
     {
+        audioData.Play();
         isHolding = true;
         Collider[] holdColliders = Physics.OverlapSphere(tf.position, holdRadius);
         int i = 0;
