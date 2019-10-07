@@ -277,7 +277,9 @@ public class Manager : MonoBehaviour
         resident.GetComponent<Resident>().StopWaffle();
 
         resident.GetComponent<Resident>().SetDestination(carloc.transform);
+        car.GetComponent<Car>().inCar = false;
 
+        Debug.Log("Looking for car..");
         while (gameState == State.CAR)
         {
             yield return new WaitForSeconds(0.05f);
@@ -290,6 +292,8 @@ public class Manager : MonoBehaviour
             }
 
         }
+
+        Debug.Log("Finished!");
 
         car.GetComponent<Car>().SetDestination(awayloc.transform);
         Destroy(resident.GetComponent<Resident>().mysprite);

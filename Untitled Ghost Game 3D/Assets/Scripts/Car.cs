@@ -25,7 +25,7 @@ public class Car : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         Debug.Log("Colliding with layer " + other.gameObject.layer);
-        if (other.gameObject.layer == 0)
+        if (other.gameObject.layer == 0 && other.gameObject.tag == "Resident")
         {
             Debug.Log("Trigger for Car!");
             if (!inCar)
