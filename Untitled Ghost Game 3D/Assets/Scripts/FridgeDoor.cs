@@ -22,8 +22,8 @@ public class FridgeDoor : MonoBehaviour
         {
             fridgeAnimController.SetBool("pushed", true);
             audioData.Play(0);
+            SpawnCan();
         }
-        SpawnCan();
     }
 
     private void SpawnCan()
@@ -31,6 +31,8 @@ public class FridgeDoor : MonoBehaviour
         Debug.Log(message: "spawning can");
         collider.enabled = false;
         can = Instantiate(can, canOrigin.transform.position, Quaternion.identity);
+        Vector3 launchForce = new Vector3(1, 0, 0);
+        can.GetComponent<Rigidbody>().AddForce(launchForce);
 
     }
 
