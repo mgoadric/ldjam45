@@ -22,6 +22,18 @@ public class Car : MonoBehaviour
     }
 
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.layer == 10)
+        {
+            Debug.Log("Trigger for Car!");
+            if (!inCar)
+            {
+                inCar = true;
+            }
+        }
+    }
+
     public void SetDestination(Transform dest)
     {
         agent.destination = dest.position;
