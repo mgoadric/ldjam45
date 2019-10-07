@@ -5699,7 +5699,7 @@ GameObject:
   - component: {fileID: 1086647774}
   - component: {fileID: 1086647773}
   - component: {fileID: 1086647777}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: keys
   m_TagString: Moveable
   m_Icon: {fileID: 0}

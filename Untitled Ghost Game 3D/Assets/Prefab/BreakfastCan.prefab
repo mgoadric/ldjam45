@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6401929937435930868}
   - component: {fileID: 6401929937435930867}
   - component: {fileID: 6401929937435930871}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: BreakfastCan
   m_TagString: Moveable
   m_Icon: {fileID: 0}

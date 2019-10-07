@@ -24,20 +24,26 @@ public class StoveTop : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log("Trigger for stovetop!");
-        stayCount = 0f;
+        if (other.gameObject.layer == 12)
+        {
+            Debug.Log("Trigger for stovetop!");
+            stayCount = 0f;
+        }
     }
 
     // stayCount allows the OnTriggerStay to be displayed less often
     // than it actually occurs.
     private void OnTriggerStay(Collider other)
     {
-        stayCount = stayCount + Time.deltaTime;
-        if (!cooked)
+        if (other.gameObject.layer == 12)
         {
-            if (stayCount > 3.0f)
+            stayCount = stayCount + Time.deltaTime;
+            if (!cooked)
             {
-                cooked = true;
+                if (stayCount > 3.0f)
+                {
+                    cooked = true;
+                }
             }
         }
     }
