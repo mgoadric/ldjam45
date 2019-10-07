@@ -10,6 +10,7 @@ public class Resident : MonoBehaviour
 
     public GameObject dialogBubble;
     public GameObject spirit;
+    public GameObject keyfinder;
 
     private bool talking;
     private IEnumerator coroutine;

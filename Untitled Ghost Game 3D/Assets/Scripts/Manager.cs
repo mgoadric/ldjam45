@@ -261,7 +261,7 @@ public class Manager : MonoBehaviour
         {
             yield return new WaitForSeconds(0.05f);
             // finished when can cooking on stove
-            if (resident.GetComponent<Resident>().spirit.GetComponent<Chillable>().hasKeys)
+            if (resident.GetComponent<Resident>().keyfinder.GetComponent<KeyFinder>().hasKeys)
             {
                 gameState = State.CAR;
                 AddGoal("Good work!");
