@@ -500,6 +500,8 @@ MonoBehaviour:
   whispered: 0
   mystate: 0
   chill: {fileID: 8300000, guid: b2d3a28626aca46d8bfaa9a448e58299, type: 3}
+  hasKeys: 0
+  inCar: 0
 --- !u!65 &46594241
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4444,6 +4446,7 @@ MonoBehaviour:
   downstairs1: {fileID: 1423832646}
   carloc: {fileID: 1587388980}
   stairs: {fileID: 649532071}
+  stovetop: {fileID: 1102601906}
 --- !u!4 &869279893
 Transform:
   m_ObjectHideFlags: 0
@@ -5713,6 +5716,7 @@ MonoBehaviour:
   xOffset: 0
   yOffset: 0
   zOffset: 0
+  cooked: 0
 --- !u!1 &1106809456
 GameObject:
   m_ObjectHideFlags: 0
@@ -6428,6 +6432,8 @@ MonoBehaviour:
   whispered: 0
   mystate: 0
   chill: {fileID: 8300000, guid: b2d3a28626aca46d8bfaa9a448e58299, type: 3}
+  hasKeys: 0
+  inCar: 0
 --- !u!65 &1234218283
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -239,20 +239,22 @@ public class Manager : MonoBehaviour
             {
                 gameState = State.KEYS;
                 AddGoal("Find keys");
-                resident.GetComponent<Resident>().Dialog("That smells\ngood!", 4f);
+                resident.GetComponent<Resident>().Dialog("Smells\ngood!", 4f);
             }
 
         }
 
         // resident goes to stove and eats
         resident.GetComponent<Resident>().SetDestination(stoveloc.transform);
+        cat.GetComponent<Cat>().SetDestination(showerLoc.transform);
+
         yield return new WaitForSeconds(5f);
         resident.GetComponent<Resident>().Dialog("Yum!", 4f);
         yield return new WaitForSeconds(5f);
         resident.GetComponent<Resident>().Dialog("Where are\nmy keys?", 4f);
 
         // then they try to find their car keys
-        resident.GetComponent<Resident>().Waffle(bed2.transform, downstairs1.transform);
+        resident.GetComponent<Resident>().Waffle(bed1.transform, downstairs1.transform);
 
 
         while (gameState == State.KEYS)
@@ -263,7 +265,7 @@ public class Manager : MonoBehaviour
             {
                 gameState = State.CAR;
                 AddGoal("Good work!");
-                resident.GetComponent<Resident>().Dialog("Goodbye/nghost?", 4f);
+                resident.GetComponent<Resident>().Dialog("Goodbye\nghost?", 4f);
             }
 
         }
@@ -285,8 +287,6 @@ public class Manager : MonoBehaviour
             }
 
         }
-
-
 
     }
 }
