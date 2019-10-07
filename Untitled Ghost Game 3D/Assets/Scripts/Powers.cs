@@ -209,6 +209,11 @@ public class Powers : MonoBehaviour
                 Debug.Log(message: "ActionOnPush Found!");
                 hitColliders[i].gameObject.GetComponent<FridgeDoor>().OnPush();
             }
+            else if (hitColliders[i].gameObject.tag == "Stovetop")
+            {
+                Debug.Log(message: "Stovetop Found!");
+                hitColliders[i].gameObject.GetComponent<Stove>().OnPush();
+            }
             i++;
         }
         if(objectForces != "")
