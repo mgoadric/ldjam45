@@ -6,8 +6,6 @@ using UnityEngine.AI;
 
 public class Resident : MonoBehaviour
 {
-    public Transform goal1;
-    public Transform goal2;
     private NavMeshAgent agent;
 
     public GameObject dialogBubble;
@@ -46,25 +44,46 @@ public class Resident : MonoBehaviour
         agent.destination = dest.position;
     }
 
+    public void Waffle(Transform goal1, Transform goal2)
+    {
+        StartCoroutine(PingPong(goal1, goal2));
+    }
+
+    public void StopWaffle()
+    {
+        StopCoroutine("PingPong");
+    }
+
+    IEnumerator PingPong(Transform goal1, Transform goal2)
+    {
+        agent.destination = goal1.position;
+        while (true)
+        {
+            yield return new WaitForSeconds(0.5f);
+            Debug.Log(Vector3.Distance(transform.position, goal1.position));
+
+            // Just trying to get simple back and forth working.
+            if (Vector3.Distance(transform.position, goal1.position) < 1.0f)
+            {
+                agent.destination = goal2.position;
+            }
+            else if (Vector3.Distance(transform.position, goal2.position) < 1.0f)
+            {
+                agent.destination = goal1.position;
+            }
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {   
         agent = GetComponent<NavMeshAgent>();
-        agent.destination = goal1.position;
         talking = false;
     }
 
     // Update is called once per frame
     void Update()
     {   
-        Debug.Log(Vector3.Distance(transform.position, goal1.position));
-        // Just trying to get simple back and forth working.
-        if (Vector3.Distance(transform.position, goal1.position) < 1.0f)
-        {
-            agent.destination = goal2.position;
-        } else if (Vector3.Distance(transform.position, goal2.position) < 1.0f)
-        {
-            agent.destination = goal1.position;
-        }
+
     }
 }

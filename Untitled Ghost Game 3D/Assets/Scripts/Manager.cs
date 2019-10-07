@@ -28,6 +28,10 @@ public class Manager : MonoBehaviour
     public GameObject ghost;
     public GameObject fridge;
 
+    public GameObject showerLoc;
+    public GameObject bed1;
+    public GameObject bed2;
+
     public static Manager S;
 
     private void Awake()
@@ -138,6 +142,8 @@ public class Manager : MonoBehaviour
             }
         }
 
+        resident.GetComponent<Resident>().Waffle(bed1.transform, bed2.transform);
+
         while (gameState == State.CHILL)
         {
             yield return new WaitForSeconds(0.05f);
@@ -149,6 +155,9 @@ public class Manager : MonoBehaviour
             }
 
         }
+
+        resident.GetComponent<Resident>().StopWaffle();
+        resident.GetComponent<Resident>().SetDestination(showerLoc.transform);
 
         cat.GetComponent<Cat>().spirit.GetComponent<BoxCollider>().enabled = true;
         while (gameState == State.CATWHISPER)
@@ -173,8 +182,9 @@ public class Manager : MonoBehaviour
                 AddGoal("Open the fridge");
                 resident.GetComponent<Resident>().Dialog("Come here\nTabi!", 4f);
             }
-
         }
+
+        cat.GetComponent<Cat>().SetDestination(resident.transform);
 
         // activate pulse
         ghost.transform.GetChild(0).GetComponent<Powers>().pushUnlocked = true;

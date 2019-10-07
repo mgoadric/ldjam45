@@ -6,16 +6,19 @@ using UnityEngine.AI;
 public class Cat : MonoBehaviour
 {
 
-    public Transform goal;
     public GameObject spirit;
+    private NavMeshAgent agent;
 
     // Start is called before the first frame update
     void Start()
     {
-        NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        agent.destination = goal.position;
+        agent = GetComponent<NavMeshAgent>();
     }
 
+    public void SetDestination(Transform dest)
+    {
+        agent.destination = dest.position;
+    }
     // Update is called once per frame
     void Update()
     {
