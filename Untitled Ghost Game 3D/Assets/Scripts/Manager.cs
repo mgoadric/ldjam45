@@ -167,10 +167,12 @@ public class Manager : MonoBehaviour
             {
                 gameState = State.CATCHILL;
                 AddGoal("Chill the cat.");
-                resident.GetComponent<Resident>().Dialog("Is that\nyou, Tabi?", 4f);
+                resident.GetComponent<Resident>().Dialog("Tabi,\nyou ok?", 4f);
                 cat.GetComponent<AudioSource>().Play(0);
             }
         }
+
+        resident.GetComponent<Resident>().SetDestination(bed2.transform);
 
         while (gameState == State.CATCHILL)
         {

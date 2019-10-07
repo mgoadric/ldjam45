@@ -12,6 +12,7 @@ public class Resident : MonoBehaviour
     public GameObject spirit;
 
     private bool talking;
+    private IEnumerator coroutine;
 
     public void Dialog(string line, float duration)
     {
@@ -46,12 +47,13 @@ public class Resident : MonoBehaviour
 
     public void Waffle(Transform goal1, Transform goal2)
     {
-        StartCoroutine(PingPong(goal1, goal2));
+        coroutine = PingPong(goal1, goal2);
+        StartCoroutine(coroutine);
     }
 
     public void StopWaffle()
     {
-        StopCoroutine("PingPong");
+        StopCoroutine(coroutine);
     }
 
     IEnumerator PingPong(Transform goal1, Transform goal2)
